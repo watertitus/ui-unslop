@@ -1,0 +1,30 @@
+name: Validate skill
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate skill and references
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('skills/ui-unslop/SKILL.md')
+          data=p.read_text()
+          assert data.startswith('---\n')
+          assert '\nname: ui-unslop\n' in data
+          assert '\ndescription:' in data
+          for name in ('20-principles.md','audit-rubric.md','report-template.md'):
+              assert (p.parent/'references'/name).is_file()
+          print('Skill metadata and references OK')
+          PY
+      - name: Run installer tests
+        run: python -m unittest discover -s tests -v

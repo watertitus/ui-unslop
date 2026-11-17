@@ -1,0 +1,19 @@
+# UI Unslop report template
+
+## Scope
+Screen(s): ...
+Evidence reviewed: ...
+Constraints: ...
+
+## Priority findings
+| Priority | Principle | Observed issue (with evidence) | Proposed correction |
+|---|---|---|---|
+| High | 9 — Specific headline | ... | ... |
+
+## Design decisions
+Describe the chosen content hierarchy, reusable tokens and expected interaction behavior in a short paragraph.
+
+## Implementation and verification
+Files modified: ...
+Checks run and results: ...
+Unverified states / follow-up: ...
